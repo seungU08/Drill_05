@@ -49,9 +49,7 @@ frame = 1
 x, y = Tuk_width/2, Tuk_height/2
 
 while running:
-    clear_canvas()
-    TUK_Ground.draw(Tuk_width//2,Tuk_height//2)
-    update_canvas()
+    
     random_move()
 
 
