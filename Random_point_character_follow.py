@@ -14,21 +14,25 @@ def draw_points(x,y):
 def random_move():
     global x,y,frame
     x1,y1 = x,y
-    x2,y2 = random.randint(0,1280),random.randint(0,1024)
+    x2,y2 = random.randint(100,1180),random.randint(200,824)
 
 
-    for i in range(0,100,4):
+    for i in range(0,100,2):
         clear_canvas()
         TUK_Ground.draw(Tuk_width//2,Tuk_height//2)
         draw_points(x2, y2)
         t = i /100
         x = (1 - t) * x1 + t * x2
         y = (1 - t) * y1 + t * y2
-        character.clip_draw(frame*100,100*1,100,100,x,y)
+        if x1 <= x2:
+            character.clip_draw(frame*100,100*1,100,100,x,y)
+        else:
+            character.clip_draw(frame * 100, 100 * 0, 100, 100, x, y)
         update_canvas()
 
         frame = (frame+1)%8
-        delay(0.05)
+        delay(0.05*t)
+        handle_events()
 
 def handle_events():
     global running
@@ -47,12 +51,8 @@ x, y = Tuk_width/2, Tuk_height/2
 while running:
     clear_canvas()
     TUK_Ground.draw(Tuk_width//2,Tuk_height//2)
-    character.clip_draw(frame*100,100*1,100,100,x,y)
     update_canvas()
-
-    frame = (frame+1)%8
     random_move()
-    handle_events()
-    delay(0.05)
+
 
 close_canvas()
